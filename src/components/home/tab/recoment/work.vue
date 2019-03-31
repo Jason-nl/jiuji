@@ -1,0 +1,65 @@
+<template>
+    <div class="work">
+        <SeleTop :index="index"/>
+
+        <ul class="work-box">
+            <li v-for="(item,index) in workbox" :key="index">
+                <img :src="item.imagePath">
+            </li>
+        </ul>
+    </div>
+</template>
+
+<script>
+    import SeleTop from "../../common/sectTop";
+    import axios from 'axios';
+
+    export default {
+        name: "word",
+        data() {
+            return {
+                index: 19,
+                workbox: [],
+            }
+        },
+        created() {
+            axios({
+                method: 'get',
+                url: "/api/web/api/floors/v1?label=0&page=1&random=0"
+            }).then(data => {
+                let top_t = data.data.data.container.floor[20].content;
+                let top_b = data.data.data.container.floor[21].content;
+                this.workbox = top_t.concat(top_b);
+            }).catch(err => {
+                console.log(err);
+            })
+        },
+        components: {
+            SeleTop
+        }
+    }
+</script>
+
+<style scoped>
+    .work{
+        width: 100%;
+        height: 282px;
+    }
+    .work-box li {
+        width: 50%;
+        height: 100%;
+    }
+
+    .work-box {
+        width: 100%;
+        height: 120px;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+    }
+
+    .work-box img {
+        width: 100%;
+        height: 100%;
+    }
+</style>
