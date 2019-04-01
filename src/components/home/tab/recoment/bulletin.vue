@@ -30,33 +30,14 @@
 </template>
 
 <script>
-import axios from "axios";
-import Swiper from "swiper";
 export default {
   name: "bulletin",
-  created() {
-    axios
-      .get("/api/web/api/floors/v1?label=0&page=1&random=0")
-      .then(data => {
-        let res = data.data.data.container.floor[7].content;
-        this.headlinelist = res;
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  },
+  props:["headlinelist"],
   data() {
     return {
       icon_l:
         "https://img2.ch999img.com/m/static/assets/news.631f4fc3356569715f192b0173db71da.png",
-      headlinelist: []
     };
-  },
-  mounted() {
-    var mySwiper = new Swiper(".swiper-container", {
-      direction: "vertical", // 垂直切换选项
-      loop: true // 循环模式选项
-    });
   }
 };
 </script>

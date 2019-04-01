@@ -12,26 +12,18 @@
 
 <script>
     import SeleTop from "../../common/sectTop";
-    import axios from 'axios';
+    import Vuex from 'vuex';
 
     export default {
         name: "word",
         data() {
             return {
                 index: 19,
-                workbox: [],
             }
         },
-        created() {
-            axios({
-                method: 'get',
-                url: "/api/web/api/floors/v1?label=0&page=1&random=0"
-            }).then(data => {
-                let top_t = data.data.data.container.floor[20].content;
-                let top_b = data.data.data.container.floor[21].content;
-                this.workbox = top_t.concat(top_b);
-            }).catch(err => {
-                console.log(err);
+        computed: {
+            ...Vuex.mapState({
+                workbox: state => state.Home.workbox
             })
         },
         components: {
@@ -41,10 +33,11 @@
 </script>
 
 <style scoped>
-    .work{
+    .work {
         width: 100%;
         height: 282px;
     }
+
     .work-box li {
         width: 50%;
         height: 100%;

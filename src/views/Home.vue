@@ -15,9 +15,6 @@ export default {
   components: {
     Search,
     Tab
-  },
-  created(){
-    console.log(this);
   }
 };
 </script>
