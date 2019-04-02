@@ -13,26 +13,15 @@
 </template>
 
 <script>
-    import axios from 'axios'
+    import Vuex from 'vuex'
 
     export default {
         name: "flexswiper",
-        data() {
-            return {
-                optimizs: []
-            }
-        },
-        created() {
-            axios({
-                method: 'get',
-                url: '/api/web/api/floors/specialEnjoy/v1'
-            }).then(data => {
-
-                this.optimizs = data.data.data.optimize;
-            }).catch(err => {
-                throw err;
+        computed: {
+            ...Vuex.mapState({
+                optimizs: state => state.Home.optimizs
             })
-        }
+        },
     }
 </script>
 
@@ -43,7 +32,7 @@
         display: flex;
         flex-flow: nowrap row;
         overflow-x: scroll;
-        overflow-y:hidden;
+        overflow-y: hidden;
         padding: 10px;
 
     }
@@ -58,11 +47,11 @@
         flex-shrink: 0;
     }
 
-    .optimize-item:last-child img,.optimize-item:last-child p:nth-child(3) {
+    .optimize-item:last-child img, .optimize-item:last-child p:nth-child(3) {
         display: none;
     }
 
-    .optimize-item:last-child p:nth-child(2){
+    .optimize-item:last-child p:nth-child(2) {
         text-align: center;
         line-height: 202px;
     }

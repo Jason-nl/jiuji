@@ -1,7 +1,7 @@
 <template>
-    <div class="banner">
+    <div class="banner" data-title="首页轮播">
         <van-swipe :autoplay="3000">
-            <van-swipe-item v-for="(item, index) in images" :key="index">
+            <van-swipe-item v-for="(item, index) in banners" :key="index">
                 <img :src="item.imagePath"/>
             </van-swipe-item>
         </van-swipe>
@@ -9,22 +9,9 @@
 </template>
 
 <script>
-    import axios from 'axios'
     export default {
         name: "banner",
-        created: function () {
-            axios.get('/api/web/api/floors/v1?label=0&page=1&random=0').then(data => {
-                let res = data.data.data.container.floor[0].content;
-                this.images = res;
-            }).catch((err) => {
-                throw err;
-            })
-        },
-        data() {
-            return {
-                images: []
-            }
-        }
+        props:['banners']
     }
 </script>
 

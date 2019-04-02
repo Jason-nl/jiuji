@@ -1,10 +1,10 @@
 <template>
     <div class="recomend">
         <!--推荐页的轮播模块---公共的组件--->
-        <Banner/>
-        <Floor/>
-        <LimitActivity/>
-        <Bulletin/>
+        <Banner :banners="banners"/>
+        <Floor :floors="floors"/>
+        <LimitActivity :rushlist="rushlist"/>
+        <Bulletin :headlinelist="headlinelist"/>
         <Product/>
         <Flootopic/>
         <Optimize/>
@@ -29,6 +29,8 @@
     import Life from './recoment/life';
     import Gap from '../common/gap';
     import GoodsPhone from '../common/goods';
+    import Vuex from 'vuex';
+
     export default {
         name: "recomend",
         data() {
@@ -47,6 +49,23 @@
             Life,
             Gap,
             GoodsPhone
+        },
+        computed: {
+            ...Vuex.mapState({
+                banners: state => state.Home.banners,
+                floors: state => state.Home.floors,
+                rushlist: state => state.Home.rushlist,
+                headlinelist: state => state.Home.headlinelist,
+            })
+        },
+        created() {
+            this.handleHomeData();
+            // console.log(this);
+        },
+        methods: {
+            ...Vuex.mapActions({
+                handleHomeData: "Home/handleHomeData"
+            })
         }
     };
 </script>

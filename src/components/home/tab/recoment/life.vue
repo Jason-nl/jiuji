@@ -12,26 +12,18 @@
 
 <script>
     import SeleTop from "../../common/sectTop";
-    import axios from 'axios';
+    import Vuex from 'vuex';
 
     export default {
         name: "life",
         data() {
             return {
-                index: 22,
-                lifebox: []
+                index: 22
             }
         },
-        created() {
-            axios({
-                method: 'get',
-                url: "/api/web/api/floors/v1?label=0&page=1&random=0"
-            }).then(data => {
-                let top_t = data.data.data.container.floor[23].content;
-                let top_b = data.data.data.container.floor[24].content;
-                this.lifebox = top_t.concat(top_b);
-            }).catch(err => {
-                throw err;
+        computed: {
+            ...Vuex.mapState({
+                lifebox: state => state.Home.lifebox
             })
         },
         components: {
