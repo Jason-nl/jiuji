@@ -29,7 +29,7 @@
                 this.$router.push({name:"home"})
             },
             jumpSearch(){
-                this.$router.push({path:"/search"})
+               /* this.$router.push({path:"/search"})*/
 
             }
 

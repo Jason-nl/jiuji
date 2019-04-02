@@ -1,6 +1,8 @@
-import classifyData from "@/api/classifyData-h.js"
+import {sidebarData} from "@/api/classifyData-h"
 export default {
-            handle(){
-                console.log(classifyData)
-            }
+      async handle(){
+            let data = await sidebarData();
+          console.log(data)
+
+      }
 }

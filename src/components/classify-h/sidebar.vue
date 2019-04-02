@@ -1,23 +1,22 @@
 <template>
     <div class="sidebar">
         <ul>
-            <li @click="hanf">yijain</li>
+            <li @click="handle">test</li>
         </ul>
     </div>
 </template>
 
 <script>
+    import Vuex from 'vuex'
     export default {
         data() {
             return {
-
             }
         },
         methods:{
-            hanf(){
-                this.$store.dispatch("Classify/handle")
-            }
-
+            ...Vuex.mapActions({
+                handle:"Classify/handle"
+            })
         }
     }
 
