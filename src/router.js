@@ -51,6 +51,14 @@ export default new Router({
                 flag:true
             }
         },
+        {
+            path: "/search-form",
+            name: "search-form",
+            component: () => import("./views/search-form-h.vue"),
+            meta:{
+                flag:false
+            }
+        },
     ]
 });
 

@@ -16,10 +16,15 @@
     import Vuex from 'vuex'
     export default {
        created(){
-            this.handleSidebar();
+           if (window.sessionStorage.getItem("sidebarData")){
+              this.itemData=JSON.parse(window.sessionStorage.getItem("sidebarData"))
+           }else{
+               this.handleSidebar();
+           }
        },
         data() {
             return {
+                itemData:this.$store.state.Classify.sidebarData,
                 // 左侧高亮元素的index
                 mainActiveIndex: 0,
                 // 被选中元素的id
@@ -28,11 +33,6 @@
         },
         components:{
            List
-        },
-        computed:{
-            ...Vuex.mapState({
-                itemData:state=>state.Classify.sidebarData,
-            })
         },
         methods:{
             ...Vuex.mapActions({

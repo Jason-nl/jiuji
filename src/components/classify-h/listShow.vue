@@ -1,11 +1,12 @@
 <template>
-    <div class="list">
-        <div class="banner"><img :src="sidebarData[index].pic" alt=""></div>
-        <div class="listPic" v-for="(item,key) in sidebarData[index].children">
+    <div ref="wrapper" class="wrapper">
+    <div class="list" >
+        <div class="banner"><img :src="sidebarData[index]?sidebarData[index].pic:''" alt=""></div>
+        <div class="listPic" v-for="(item,key) in sidebarData[index]?sidebarData[index].children:''">
             <h2>{{item.title}}</h2>
             <div class="domeList">
             <div class="dome" v-for="(data,sum) in sidebarData[index].children[key].children">
-                <a href="####">
+                <a href="##">
                 <img :src="data.picture" alt="">
                 <p>{{data.title}}</p>
                 </a>
@@ -13,9 +14,11 @@
             </div>
         </div>
     </div>
+    </div>
 </template>
 
 <script>
+    import BScroll from "better-scroll"
     export default {
         props:{
             sidebarData:{
@@ -25,13 +28,22 @@
                 type:Number,
             }
         },
+        components:{
+        },
         data() {
             return {
-                img:require("@/assets/logo.png")
             }
         },
-        created(){
-            console.log(this.sidebarData)
+        created() {
+            this.$nextTick(() => {
+                if (!this.scroll){
+                    this.scroll = new BScroll(this.$refs.wrapper, {
+                        click:true,
+                    })
+                } else{
+                    this.scroll.refresh();
+                }
+            })
         }
     }
 
@@ -39,16 +51,19 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-.list{
-    width: 75%;
-    height: 11rem;
-    background: #fff;
-    position: absolute;
-    top: 0rem;
-    right: 0;
-    z-index: 10;
-
-}
+    .wrapper{
+        width: 75%;
+        background: #fff;
+        position: absolute;
+        top: 0rem;
+        right: 0;
+        z-index: 10;
+        height: 11rem;
+        overflow: hidden;
+    }
+    .list{
+        pointer-events: auto;
+    }
     .list>.banner{
         width: 95%;
         height:1.7rem ;

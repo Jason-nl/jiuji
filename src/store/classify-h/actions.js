@@ -1,5 +1,6 @@
-import {sidebarData} from "@/api/classifyData-h"
+import {sidebarData,searchShow} from "@/api/classifyData-h"
 export default {
+    //sidebar页数据的处理
       async handleSidebar({commit}){
           let arr=[];
             let data = await sidebarData();
@@ -16,12 +17,13 @@ export default {
                 }
                   arr.push(obj);
               }
-          console.log(arr)
-           /*  console.log(arr[0].children[0][0]);
-              console.log(arr[0].children[0][1]);
-             console.log(arr[0].children[0][0].title);
-             console.log(arr[0].children[0][0].children);*/
           commit("sidebarMutations",arr)
       },
+    //search-form页输入框输入时数据的处理
+    async searchShow({commit},params){
+          let  data = await searchShow(params);
+          let arrData =data.data
+        commit("searchShowData",arrData)
+    },
 
 }

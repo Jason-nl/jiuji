@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "mint-ui": "^2.2.13",
     "swiper": "^4.5.0",
     "vant": "^1.6.12",
     "vue": "^2.6.6",
@@ -17,6 +18,8 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.5.0",
     "@vue/cli-service": "^3.5.0",
+    "babel-plugin-component": "^1.1.1",
+    "better-scroll": "^1.15.1",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.1.0",
     "vue-template-compiler": "^2.5.21"
