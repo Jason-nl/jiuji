@@ -1,6 +1,5 @@
 <template>
     <div class="recomend">
-        <!--推荐页的轮播模块---公共的组件--->
         <Banner :banners="banners"/>
         <Floor :floors="floors"/>
         <LimitActivity :rushlist="rushlist"/>
@@ -60,7 +59,6 @@
         },
         created() {
             this.handleHomeData();
-            // console.log(this);
         },
         methods: {
             ...Vuex.mapActions({
