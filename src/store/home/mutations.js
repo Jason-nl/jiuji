@@ -2,7 +2,7 @@
  * @Author: Jason 
  * @Date: 2019-04-02 16:00:36 
  * @Last Modified by: Jason
- * @Last Modified time: 2019-04-10 09:51:40
+ * @Last Modified time: 2019-04-10 10:19:43
  */
 
 
@@ -19,29 +19,29 @@ export default {
         state.banners = floor[0].content;
         state.floors = floor[2].content;
         state.rushlist = params.v1data.rushToday;
-        state.headlinelist = floor[5].content;
-        state.newPro = floor[6].content;
-        state.recomPro = floor[7].content;
-        state.partsPro = floor[8].content.concat(floor[9].content);
-        state.topic_l = floor[10].content[0].imagePath;
-        state.topic_r = floor[10].content[1].imagePath;
+        state.headlinelist = floor[6].content;
+        state.newPro = floor[7].content;
+        state.recomPro = floor[8].content;
+        state.partsPro = floor[9].content.concat(floor[10].content);
+        state.topic_l = floor[11].content[0].imagePath;
+        state.topic_r = floor[11].content[1].imagePath;
         state.optimizs = params.v1data.optimize;
 
-        state.phone_t = floor[14].content;
-        state.phone_m = floor[15].content;
-        state.phone_b = floor[16].content;
+        state.phone_t = floor[15].content;
+        state.phone_m = floor[16].content;
+        state.phone_b = floor[17].content;
 
-        state.workbox = floor[18].content.concat(floor[19].content);
+        state.workbox = floor[19].content.concat(floor[20].content);
 
-        state.lifebox = floor[21].content.concat(floor[22].content);
+        state.lifebox = floor[22].content.concat(floor[23].content);
         
-        state.goodsPhone = floor[24].content.concat(floor[25].content);
+        state.goodsPhone = floor[25].content.concat(floor[26].content);
 
-        state.optimiz_img = floor[11].content[0].imagePath;
-        state.boutique_img = floor[13].content[0].imagePath;
-        state.word_img = floor[17].content[0].imagePath;
-        state.life_img = floor[20].content[0].imagePath;
-        state.goods_img = floor[23].content[0].imagePath;
+        state.optimiz_img = floor[12].content[0].imagePath;
+        state.boutique_img = floor[14].content[0].imagePath;
+        state.word_img = floor[18].content[0].imagePath;
+        state.life_img = floor[21].content[0].imagePath;
+        state.goods_img = floor[24].content[0].imagePath;
 
 
         localStorage.setItem('optimiz_img', state.optimiz_img);
