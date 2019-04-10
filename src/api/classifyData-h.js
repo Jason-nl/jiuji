@@ -12,5 +12,4 @@ export const phoneHOTData = ()=>http("get","/api/web/api/products/hotRank/v1?cid
 
 
 
-/*
-iPhone%20XS%20Max*/
+

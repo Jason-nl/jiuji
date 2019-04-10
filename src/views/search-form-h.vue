@@ -15,7 +15,7 @@
                     v-for="(item,index) in searchData"
                     icon="search"
                     is-link arrow-direction="down"
-                    href="/search/:shopName"
+                    href="/search/id=index"
             >
                     <template slot="title">
                     <span class="custom-text"
