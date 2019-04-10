@@ -7,7 +7,7 @@
 
 <script>
     import SeleTop from "../../common/sectTop";
-    import Commodity from '../../common/commodity'
+    import Commodity from '../../common/commodity';
     export default {
         name: "phone",
         data(){

@@ -30,26 +30,17 @@
 </template>
 
 <script>
-    import axios from 'axios'
+
     import Gap from '../../common/gap'
     export default {
         name: "limit_activity",
         components:{
             Gap
         },
-        created() {
-            axios.get('/api/web/api/floors/specialEnjoy/v1').then(data => {
-                let res = data.data.data.rushToday;
-                // console.log(res);
-                this.rushlist = res;
-            }).catch(err => {
-                // console.log(err);
-            })
-        },
+        props:["rushlist"],
         data() {
             return {
                 hr: 0, min: 0, sec: 0,
-                rushlist: [],
             }
         },
         mounted: function () {

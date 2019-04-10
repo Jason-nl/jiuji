@@ -2,7 +2,7 @@
     <div class="floor">
         <nav>
             <ul>
-                <li v-for="(item,index) in floor_server">
+                <li v-for="(item,index) in floors">
                     <img :src="item.imagePath" alt="">
                 </li>
             </ul>
@@ -12,23 +12,9 @@
 
 <script>
 
-    import axios from 'axios'
-
     export default {
         name: "floor",
-        created() {
-            axios.get('/api/web/api/floors/v1?label=0&page=1&random=0').then(data => {
-                let res = data.data.data.container.floor[2].content;
-                this.floor_server = res;
-            }).catch((err) => {
-                throw err;
-            })
-        },
-        data() {
-            return {
-                floor_server:[]
-            }
-        }
+        props:["floors"]
     }
 </script>
 

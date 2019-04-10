@@ -14,29 +14,21 @@
 
 <script>
     import SectTop from './sectTop';
-    import axios from 'axios';
+    import Vuex from 'vuex';
 
     export default {
         name: "goods",
         data() {
             return {
-                index: 25,
-                goodsPhone: []
+                index: 25
             }
         },
         components: {
             SectTop
         },
-        created() {
-            axios({
-                method: 'get',
-                url: "/api/web/api/floors/v1?label=0&page=1&random=0"
-            }).then(data => {
-                let top_t = data.data.data.container.floor[26].content;
-                let top_b = data.data.data.container.floor[27].content;
-                this.goodsPhone = top_t.concat(top_b);
-            }).catch(err => {
-                throw err;
+        computed: {
+            ...Vuex.mapState({
+                goodsPhone: state => state.Home.goodsPhone
             })
         }
     }
