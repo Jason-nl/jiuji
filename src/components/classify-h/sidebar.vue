@@ -61,7 +61,6 @@
 .van-tree-select__nitem{
     line-height:1rem ;
     font-size: .24rem;
-    text-align: center;
 }
 .van-tree-select__nav{
     width: 25%;

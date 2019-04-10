@@ -1,33 +1,40 @@
 <template>
     <div class="search-form">
     <div class="search">
-        <div class="s-right" @touchstart="">
+        <div class="s-right" @touchstart="handleBack">
             <van-icon name="arrow-left" />
         </div>
         <div class="s-input" @touchstart="">
-            <van-search placeholder="iPhone XS Max" v-model="value"  class="van-search"/>
+            <van-search :placeholder="placeholder" v-model="value"  class="van-search"/>
         </div>
-        <div class="s-left" @touchstart="">
+        <div class="s-left" @touchstart="handleGo(placeholder)">
             搜索
         </div>
-        <div class="shopList">
+        <div class="shopList" ref="shopList">
             <mt-cell
                     v-for="(item,index) in searchData"
-                    to="//github.com"
-                    is-link
                     icon="search"
+                    is-link arrow-direction="down"
+                    href="/search/:shopName"
             >
-                {{item.name}}
+                    <template slot="title">
+                    <span class="custom-text"
+
+                    >{{item.name}}</span>
+                    </template>
+
             </mt-cell>
-        </div>
+    </div>
     </div>
     <div class="hot">
         <h3>热门搜索</h3>
         <div class="hotList">
         <div class="listauto">
             <li
-                v-for="(item,index) in hotData.hotSearch"
-            ><a href="/home">{{item}}</a></li>
+                    v-for="(item,index) in hotData.hotSearch"
+                    @touchstart="handleGo(item)"
+
+            >{{item}}</li>
         </div>
         </div>
     </div>
@@ -40,9 +47,40 @@
                     <div slot="title"
                          name="index"
                     >{{item.content}}</div>
+                       <div class="banner" v-show="index==1">
+                           <div class="oneImg"></div>
+                           <div class="twoImg"></div>
+                           <div class="threeImg"></div>
+                       </div>
+                        <div class="hotSHop" v-show="index==0">
+                            <p>{{list[0]?list[0].title:""}}</p>
+                            <van-list
+                                    v-model="loading"
+                                    :finished="finished"
+                                    finished-text="没有更多了"
+                                    @load="onLoad"
+                            >
+                                <van-card
+                                        v-for="(item,index) in list[0]?list[0].ranks:''"
+                                        :thumb="item.image"
+                                        thumb-link="/product"
+                                >
+                                <div slot="title">{{item.productName}}</div>
+                                    <div slot="price">￥：
+                                        {{item.price}}</div>
+                                    <div slot="num">销量排名：{{item.rank}}</div>
+                                    <div slot="desc">
+                                        热度：
+                                        <van-progress
+                                                :percentage="(item.percentage)*100"
+                                                pivot-color="#7232dd"
+                                                color="linear-gradient(to right, #be99ff, #7232dd)"
+                                        />
 
-                   <!-- 填充搜索框内我那个&lt;!&ndash;&ndash;&gt;
-                    提供多样店铺模板，快速搭建网上商城-->
+                                       </div>
+                                </van-card>
+                            </van-list>
+                        </div>
                 </van-collapse-item>
             </van-collapse>
     </div>
@@ -53,22 +91,53 @@
     export default {
         created(){
             this.handleHotData();
-        },
-        updated(){
-            console.log(this. searchData)
+            this.handlePhoneHot();
         },
         data() {
             return {
                 value:"",
-                active: 0,
                 activeName:2,
+                placeholder:"iPhone XS Max",
                /* hotData:this.$store.state.Classify.hotData*/
+                list: this.$store.state.Classify.phoneHOTData,
+                loading: false,
+                finished: false
             }
         },
         methods:{
             handleHotData(){
                 this.$store.commit("Classify/hotSearch");
             },
+            handlePhoneHot(){
+                this.$store.commit("Classify/phoneHot");
+            },
+            handleBack(){
+                this.$router.back()
+            },
+            handleGo(val){
+                this.$router.push("/search/"+val);
+            },
+
+
+
+
+            onLoad() {
+                let arr = [];
+                arr = this.list[0].ranks
+                // 异步更新数据
+                setTimeout(() => {
+                    for (let i = 0; i < 10; i++) {
+                        this.list.push(this.list[0].ranks.length + 1);
+                    }
+                    // 加载状态结束
+                    this.loading = false;
+
+                    // 数据全部加载完成
+                    if (this.list[0].ranks.length >= 20) {
+                        this.finished = true;
+                    }
+                }, 500);
+            }
 
         },
         computed:{
@@ -160,5 +229,51 @@
         left:0;
         width:100%;
         z-index: 9;
+    }
+    .shopList>.mint-cell>.mint-cell-wrapper>.mint-cell-title{
+     flex: none;
+    }
+    .shopList>.mint-cell>.mint-cell-wrapper>.mint-cell-value>.is-link{
+        margin-right:0;
+    }
+
+    .banner{
+        height: 7rem;
+        width: 100%;
+        overflow: auto;
+    }
+    .banner>.oneImg{
+        width: 100%;
+        height: 5rem;
+        background-color: rgb(255, 255, 255);
+        background-image: url("http://img2.ch999img.com//pic/topic/2019032705139717.jpg");background-position: center center;
+        background-repeat: no-repeat;
+        background-size:100%;
+    }
+    .banner>.twoImg{
+        margin: .3rem 0;
+        width: 100%;
+        height: 5rem;
+        background-color: rgb(255, 255, 255);
+        background-image: url("http://img2.ch999img.com//pic/topic/2019032711038503.jpg");background-position: center center;
+        background-repeat: no-repeat;
+        background-size:100%;
+    }
+    .banner>.threeImg{
+        width: 100%;
+        height: 5rem;
+        background-color: rgb(255, 255, 255);
+        background-image: url("http://img2.ch999img.com//pic/topic/2019032711036918.jpg");background-position: center center;
+        background-repeat: no-repeat;
+        background-size:100%;
+    }
+    .hotSHop{
+        height: 7rem;
+        width: 100%;
+        overflow: auto;
+        p{
+            margin-bottom:.3rem;
+            text-align: center;
+        }
     }
 </style>

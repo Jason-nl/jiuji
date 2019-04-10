@@ -58,6 +58,25 @@ export default new Router({
             meta:{
                 flag:false
             }
+
+        },
+        {
+            path: "/search/:shopName",
+            name: "search",
+            component: () => import("./views/Search.vue"),
+            meta:{
+                flag:false
+            }
+
+        },
+        {
+            path: "/product",
+            name: "product",
+            component: () => import("./views/product-h.vue"),
+            meta:{
+                flag:false
+            }
+
         },
     ]
 });

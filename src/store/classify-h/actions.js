@@ -1,4 +1,4 @@
-import {sidebarData,searchShow} from "@/api/classifyData-h"
+import {sidebarData,searchShow,SearchList} from "@/api/classifyData-h"
 export default {
     //sidebar页数据的处理
       async handleSidebar({commit}){
@@ -25,5 +25,20 @@ export default {
           let arrData =data.data
         commit("searchShowData",arrData)
     },
+    //Search页商品列表展示的数据
+    async SearchList({commit},params){
+        let txt =/^\d+$/;
+        let valOne="";
+        let valTwo ="";
+
+        if(txt.test(params.charAt(0))){
+            valOne=params;
+        }else{
+            valTwo=params;
+        }
+          let data = await SearchList(valOne,valTwo);
+          let arrData = data.data.product.list;
+          commit("SearchListData",arrData)
+    }
 
 }

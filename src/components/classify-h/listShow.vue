@@ -6,10 +6,12 @@
             <h2>{{item.title}}</h2>
             <div class="domeList">
             <div class="dome" v-for="(data,sum) in sidebarData[index].children[key].children">
-                <a href="##">
+                <i
+                    @click="handleMsg(index,key,sum)"
+                >
                 <img :src="data.picture" alt="">
                 <p>{{data.title}}</p>
-                </a>
+                </i>
             </div>
             </div>
         </div>
@@ -44,6 +46,12 @@
                     this.scroll.refresh();
                 }
             })
+        },
+        methods:{
+            handleMsg(s,u,m){
+                let msg= this.sidebarData[s].children[u].children[m].coll
+                this.$router.push("/search/"+msg)
+            }
         }
     }
 

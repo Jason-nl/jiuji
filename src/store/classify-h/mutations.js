@@ -1,4 +1,4 @@
-import  {hotSearch} from "@/api/classifyData-h";
+import  {hotSearch,phoneHOTData} from "@/api/classifyData-h";
 export default {
     //contract显示和隐藏的判断
     handleCon(state){
@@ -21,7 +21,19 @@ export default {
     },
     //search-form页的输入框返回的数据
     searchShowData(state,params){
+        state.searchShowData=[];
         state.searchShowData.push(...params);
-    }
+    },
+    //Search页的list的商品列表数据
+    SearchListData(state,params){
+        state.SearchListData=[];
+        state.SearchListData.push(...params);
+    },
+    //手机热销排行榜的数据
+    async phoneHot(state){
+        let data= await phoneHOTData();
+        let params=data.data;
+        state.phoneHOTData.push(params);
+    },
 
 }
