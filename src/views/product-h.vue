@@ -28,6 +28,7 @@
 
             </div>
             <div id="judge">
+                <h3>用户评价：</h3>
                 <van-notice-bar mode="link">
                     1.商品的质量，主要功能，与其他商品比较有何特别之处。  2.商品的价格，如是否合理。  3.售后服务有哪些？等等…………
                 </van-notice-bar>

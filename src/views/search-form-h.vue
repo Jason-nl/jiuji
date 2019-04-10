@@ -15,14 +15,14 @@
                     v-for="(item,index) in searchData"
                     icon="search"
                     is-link arrow-direction="down"
-                    href="/search/id=index"
+                    href='/search/apple'
             >
-                    <template slot="title">
-                    <span class="custom-text"
+                    <template slot="title"
 
+                    >
+                    <span class="custom-text"
                     >{{item.name}}</span>
                     </template>
-
             </mt-cell>
     </div>
     </div>
